@@ -17,6 +17,11 @@ export const fetchErrorToast = (fallbackMessage: string) => (error: unknown) => 
   );
   return { icon, message };
 };
+const errorToast = (text: ReactNode) => ({
+  icon: <CircleAlert className="text-error not-first:hidden" />,
+  message: text,
+});
+
 /** Used for showing custom error messages in legacy backend. */
 export function showErrorToast(text: ReactNode, optionsOverride?: ExternalToast) {
   const { message, ...options } = errorToast(text);

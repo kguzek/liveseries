@@ -8,7 +8,6 @@ import type {
   ErrorResponseMultiple,
   UserLocale,
 } from "@/lib/types";
-import type { Media } from "@/payload-types";
 
 import type { DownloadedEpisode } from "./types";
 import { EMAIL_VERIFICATION_COOKIE, LOCALES } from "./constants";
@@ -80,8 +79,9 @@ const isErrorMultiple = (json: ErrorResponseBody): json is ErrorResponseMultiple
 const mapErrorMultiple = (json?: ErrorResponseMultiple): string[] =>
   json == null
     ? []
-    : json.errors.flatMap(({ message, data }) =>
-        [message == null ? [] : [message], mapErrorMultiple(data)].flat(),
+    : json.errors.flatMap(
+        ({ message, data }: { message?: string; data?: ErrorResponseMultiple }) =>
+          [message == null ? [] : [message], mapErrorMultiple(data)].flat(),
       );
 
 /** Formats the response's JSON body into a user-readable error message, with a fallback to simply displaying the JSON,
@@ -140,12 +140,6 @@ export function getCookieOptions({
     ...options,
   } as const;
 }
-
-type MediaImage = Pick<Media, "id" | "createdAt" | "updatedAt" | "alt"> & {
-  url: string;
-  width: number;
-  height: number;
-};
 
 export function addOrRemove<T>(
   items: T[] | null | undefined,

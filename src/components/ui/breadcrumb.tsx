@@ -52,19 +52,6 @@ function BreadcrumbLink({
   );
 }
 
-function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
-  return (
-    <span
-      data-slot="breadcrumb-page"
-      role="link"
-      aria-disabled="true"
-      aria-current="page"
-      className={cn("font-normal text-neutral-950 dark:text-neutral-50", className)}
-      {...props}
-    />
-  );
-}
-
 function BreadcrumbSeparator({
   children,
   className,

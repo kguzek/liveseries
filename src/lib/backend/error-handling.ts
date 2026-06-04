@@ -36,6 +36,24 @@ export class HttpError extends RequestError {
   }
 }
 
+class BodyConsumptionError extends RequestError {
+  constructor(response: Response) {
+    super(
+      `Failed to read response body: ${response.status} ${response.statusText}`,
+      "body",
+    );
+  }
+}
+
+class JsonParsingError extends RequestError {
+  constructor(response: Response, body: string) {
+    super(
+      `Failed to parse JSON response: ${response.status} ${response.statusText}`,
+      "json",
+    );
+  }
+}
+
 export async function getResponse<T>(url: string, options: RequestInit) {
   const method = options.method ?? "GET";
 

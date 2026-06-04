@@ -37,6 +37,10 @@ export function parseResponseBody(body: string) {
   throw new Error("No substring of the body yields valid JSON.");
 }
 
+function pathToTag(path: string) {
+  return path.replace(/[/]/g, "-").replace(/^-/, "");
+}
+
 /** Formats a key-value dictionary into a string ready for use in a URL.
  *
  * @param params The key-value dictionary to format. Can be a `URLSearchParams` object, or an object (empty or not).

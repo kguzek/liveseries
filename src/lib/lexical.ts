@@ -2,7 +2,6 @@ import type { HTMLConverter } from "@payloadcms/richtext-lexical";
 import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 import type { HtmlToTextOptions } from "html-to-text";
 import type { Payload } from "payload";
-import { getPayload } from "payload";
 import config from "@payload-config";
 import {
   consolidateHTMLConverters,

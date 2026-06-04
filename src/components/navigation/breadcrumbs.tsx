@@ -29,7 +29,7 @@ const capitalize = (value: string) =>
     .join(" ");
 
 type Parallel = { label: string; slug: string };
-type Parallels = (null | Parallel[] | Record<string, Parallel[]>)[];
+export type Parallels = (null | Parallel[] | Record<string, Parallel[]>)[];
 
 const NON_STANDALONE_PARTS = ["tv-show"];
 

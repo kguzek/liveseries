@@ -161,37 +161,3 @@ export function NavigationBar({
     </nav>
   );
 }
-
-function MiniNavBar({
-  pathBase,
-  pages,
-}: {
-  pathBase: string;
-  pages: {
-    link: string;
-    label: string;
-  }[];
-}) {
-  const pathname = usePathname();
-
-  const isActive = (path: string) =>
-    path
-      ? pathname.startsWith(`/${pathBase}/${path}`)
-      : [`/${pathBase}`, `/${pathBase}/`].includes(pathname);
-
-  return (
-    <nav className="mt-2 flex justify-center gap-2 font-serif text-sm sm:text-base md:gap-4 md:text-lg lg:justify-start">
-      {pages.map(({ link, label }, idx) => (
-        <Link
-          key={idx}
-          className={cn("clickable hover-underline text-primary font-sans", {
-            "underlined text-primary-strong": isActive(link),
-          })}
-          href={`/${pathBase}/${link}`}
-        >
-          {label}
-        </Link>
-      ))}
-    </nav>
-  );
-}

@@ -1,7 +1,7 @@
 import type { NextRequest, NextResponse } from "next/server";
 
 import type { LOCALES } from "./constants";
-import type { DownloadStatus, LOG_LEVELS } from "./enums";
+import type { DownloadStatus } from "./enums";
 
 export type UserLocale = (typeof LOCALES)[number];
 
@@ -13,7 +13,7 @@ type ErrorResponseSingle = ApiMessage & {
   type?: string;
   data?: { id?: string } & (ErrorResponseMultiple | undefined);
 };
-type ErrorResponseMultiple = { errors: ErrorResponseSingle[] };
+export type ErrorResponseMultiple = { errors: ErrorResponseSingle[] };
 export type ErrorResponseBodyPayloadCms = ErrorResponseSingle | ErrorResponseMultiple;
 
 export type ErrorResponseBody = ErrorResponseBodyPayloadCms;
@@ -66,4 +66,9 @@ export interface EmailRecipientManual {
   email: string;
 }
 
-export type EmailRecipient = EmailRecipientManual;
+export interface EmailRecipientUser {
+  type: "user";
+  user: string;
+}
+
+export type EmailRecipient = EmailRecipientManual | EmailRecipientUser;

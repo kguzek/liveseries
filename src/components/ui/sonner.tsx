@@ -1,7 +1,7 @@
 "use client";
 
 import type { ExternalToast, ToasterProps } from "sonner";
-import { Check, Info } from "lucide-react";
+import { Check } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Toaster as Sonner, toast } from "sonner";
 
@@ -43,6 +43,11 @@ export function showSuccessToast(
     toast.success(message, { ...options, ...optionsOverride });
   }, 0);
 }
+
+const infoToast = (message: string) => ({
+  icon: <Check className="text-info" />,
+  message,
+});
 
 export function showInfoToast(text: string) {
   const { message, ...options } = infoToast(text);

@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties, EventHandler, MouseEvent, TouchEvent } from "react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Glow } from "@codaworks/react-glow";
 import { Slot } from "@radix-ui/react-slot";
 import { Loader, Lock } from "lucide-react";
