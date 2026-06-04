@@ -139,8 +139,10 @@ export default async function LiveSeriesLandingPage() {
             {t("liveSeries.landing.cron.title")}
           </h2>
           <p>{t("liveSeries.landing.cron.body")}</p>
-          <div className="field mt-3 inline-flex items-center gap-2 text-base">
-            <span className="font-mono select-all">{CRON_UUID}</span>
+          <div className="bg-background-soft text-primary-strong mt-3 flex max-w-full items-center gap-2 rounded-[5px] px-1 py-0.5 text-xs select-all sm:inline-flex sm:text-base sm:whitespace-nowrap">
+            <span className="min-w-0 font-mono break-all sm:break-normal">
+              {CRON_UUID}
+            </span>
             <CopyButton value={CRON_UUID} />
           </div>
         </Tile>
