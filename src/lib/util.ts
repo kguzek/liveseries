@@ -43,17 +43,6 @@ export function getDuration(milliseconds: number) {
   return { formatted, days, hours, minutes, seconds, milliseconds };
 }
 
-export function scrollToElement(
-  selector: string,
-  inline: ScrollLogicalPosition = "center",
-) {
-  document.querySelector(selector)?.scrollIntoView({
-    behavior: "smooth",
-    block: "nearest",
-    inline,
-  });
-}
-
 export const isInvalidDate = (date: Date) => date.toString() === "Invalid Date";
 
 export const isNumber = (value: string): value is `${number}` =>
@@ -111,9 +100,6 @@ export const getErrorMessage = (
         : (json[`${res.status} ${STATUS_CODES[res.status] ?? res.statusText}`] ??
           JSON.stringify(json))) || fallbackMessage;
 
-export const getUTCDateString = (...dateInit: ConstructorParameters<typeof Date>) =>
-  new Date(...dateInit).toISOString().split("T")[0];
-
 const UNIT_PREFIXES = ["", "Ki", "Mi", "Gi", "Ti", "Pi", "Ei", "Zi", "Yi"];
 
 /** Converts a value in bytes to a human-readable form. E.g. (4096) => "4.00 KiB" */
@@ -155,29 +141,11 @@ export function getCookieOptions({
   } as const;
 }
 
-export function randomElement<T>(array: Array<T>): T {
-  return array[Math.floor(Math.random() * array.length)];
-}
-
-export function isScriptUrl(url: string | null | undefined) {
-  if (!url) return false;
-  const trimmed = url.trim().toLowerCase();
-  return !!trimmed.match(/^(?:javascript|data|vbscript):/);
-}
-
-export function sanitiseUrl(url: string) {
-  if (isScriptUrl(url)) return "";
-  return url;
-}
-
 type MediaImage = Pick<Media, "id" | "createdAt" | "updatedAt" | "alt"> & {
   url: string;
   width: number;
   height: number;
 };
-
-export const isImage = (image: Media | number): image is MediaImage =>
-  typeof image !== "number" && !!image.url && !!image.width && !!image.height;
 
 export function addOrRemove<T>(
   items: T[] | null | undefined,
@@ -224,11 +192,6 @@ export function removeUserCookie() {
   Cookies.remove("payload-token", getCookieOptions());
 }
 
-export function truncateText(text?: string, maxLength = 160) {
-  if (!text || text.length <= maxLength) return text;
-  return `${text.slice(0, maxLength)}…`;
-}
-
 export const beginEmailVerification = (email: string) =>
   Cookies.set(EMAIL_VERIFICATION_COOKIE, email, {
     sameSite: "lax",
@@ -248,11 +211,3 @@ export function getRequestIp(request: NextRequest, fallback = "<unknown-ip>") {
 
 export const isValidLocale = (locale?: string): locale is UserLocale =>
   !!locale && LOCALES.includes(locale as UserLocale);
-
-export const toReadableStream = (data: unknown) =>
-  new ReadableStream({
-    start(controller) {
-      controller.enqueue(data);
-      controller.close();
-    },
-  });

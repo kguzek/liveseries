@@ -22,8 +22,8 @@ export const redirectMiddleware: MiddlewareFactory = (next) =>
     }
 
     const search = request.nextUrl.searchParams.get("search");
-    if (pathname === "/liveseries/search" && search != null) {
-      return redirect(`/liveseries/search/${search}/1`, { includeSearch: false });
+    if (pathname === "/search" && search != null) {
+      return redirect(`/search/${search}/1`, { includeSearch: false });
     }
     return next(request);
   };

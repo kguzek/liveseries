@@ -4,7 +4,7 @@ import { getUser } from "@/lib/providers/auth-provider/api";
 
 import { getMiddlewareLocation } from "./util";
 
-const ROUTES_REQUIRING_AUTH = ["/profile", "/admin-logs", "/liveseries/watch"];
+const ROUTES_REQUIRING_AUTH = ["/profile", "/admin-logs", "/watch"];
 const ROUTES_REQUIRING_NOAUTH = [
   "/login",
   "/signup",

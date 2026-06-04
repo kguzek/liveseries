@@ -1,21 +1,18 @@
-export const PAGINATED_REGEX = /^(\/liveseries\/(?:search\/[^\/]+|most-popular))\/\d+?$/;
+export const PAGINATED_REGEX = /^\/(?:search\/[^\/]+|most-popular)\/\d+?$/;
 
 export const WEBSITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL || process.env.WEBSITE_URL;
 export const PRODUCTION_URL = WEBSITE_URL || "https://www.guzek.uk";
 export const GITHUB_URL = "https://github.com/kguzek";
-export const LIVESERIES_SERVER_HOMEPAGE = `${GITHUB_URL}/guzek-uk-liveseries-server`;
+export const LIVESERIES_SERVER_HOMEPAGE = `${GITHUB_URL}/liveseries-server`;
 export const TVMAZE_SCRAPER_BASE_URL =
   process.env.TVMAZE_SCRAPER_BASE_URL || "https://tvmaze-scraper.guzek.uk";
 export const EMAIL_FROM_ADDRESS = "noreply@guzek.uk";
 export const EMAIL_FROM_NAME = "Konrad Guzek";
 
-export const CAROUSEL_INDICATOR_FULL_WIDTH = 140;
 export const EMAIL_VERIFICATION_COOKIE = "pending_email_address";
 export const EMAIL_VERIFICATION_PARAM = "verify-email-success";
 
 export const OG_IMAGE_METADATA = { width: 1200, height: 630, type: "image/png" };
-export const NAV_BAR_HEIGHT_DESKTOP = 100;
-export const NAV_BAR_HEIGHT_MOBILE = 80;
 
 export const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
 export const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;

@@ -4,6 +4,21 @@
 */
 @custom-variant dark (&:is(.dark *));
 
+@view-transition {
+  navigation: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @config "../../../tailwind.config.ts";
 
 /*
@@ -49,7 +64,7 @@
 @utility text {
   font-family: @apply font-sans;
   font-weight: 500;
-  @apply mx-[5vw] sm:mx-[10vw];
+  @apply px-[40px];
 }
 
 @utility clickable {
@@ -141,6 +156,24 @@
 
   & img {
     margin: 0;
+  }
+}
+
+@utility corner-fill {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--color-accent) 20%, transparent);
+    clip-path: circle(0% at 100% 100%);
+    transition: clip-path 0.5s ease;
+    pointer-events: none;
+  }
+
+  &:hover::after {
+    clip-path: circle(150% at 100% 100%);
   }
 }
 

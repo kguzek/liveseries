@@ -26,11 +26,10 @@ const capitalize = (value: string) =>
     .split("-")
     .filter(Boolean)
     .map((part) => (part[0].toUpperCase() + part.slice(1)).replace("Tv", "TV"))
-    .join(" ")
-    .replace("Liveseries", "LiveSeries");
+    .join(" ");
 
-export type Parallel = { label: string; slug: string };
-export type Parallels = (null | Parallel[] | Record<string, Parallel[]>)[];
+type Parallel = { label: string; slug: string };
+type Parallels = (null | Parallel[] | Record<string, Parallel[]>)[];
 
 const NON_STANDALONE_PARTS = ["tv-show"];
 
@@ -43,17 +42,15 @@ export function Breadcrumbs({ parallels }: { parallels: Parallels }) {
   if (PAGINATED_REGEX.test(pathname)) {
     parts.pop();
   }
-  let ellipsisShown = false;
+  const firstMiddleIdx =
+    parts.length > 3 ? parts.findIndex((_, i) => i !== 0 && i !== parts.length - 1) : -1;
   return (
-    <Breadcrumb className="text mt-6 mb-4">
+    <Breadcrumb className="text mx-auto mt-6 mb-4 w-full max-w-7xl">
       <BreadcrumbList className="text-lg">
         {parts.map((part, idx) => {
           const omitting = parts.length > 3 && idx !== 0 && idx !== parts.length - 1;
           const showSeparator = idx !== 0 || omitting;
-          if (omitting) {
-            if (ellipsisShown) return null;
-            ellipsisShown = true;
-          }
+          if (omitting && idx !== firstMiddleIdx) return null;
           return (
             <Fragment key={idx}>
               {showSeparator && <BreadcrumbSeparator />}

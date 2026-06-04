@@ -77,15 +77,6 @@ export async function convertLexicalToHtmlWithPayload(
   return html;
 }
 
-export async function convertLexicalToPlainText(
-  editorStateJSON: SerializedEditorState,
-  wordWrap: HtmlToTextOptions["wordwrap"] = false,
-) {
-  const payload = await getPayload({ config });
-  const html = await convertLexicalToHtmlWithPayload(editorStateJSON, payload);
-  return convertHtmlToPlainText(html, wordWrap);
-}
-
 export function convertHtmlToPlainText(
   html: string,
   wordWrap: HtmlToTextOptions["wordwrap"] = false,

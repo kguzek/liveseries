@@ -51,7 +51,6 @@ function getSearchParams(params: Record<string, string> | URLSearchParams = {}) 
 
 type BodyFetchOptions = {
   method: "POST" | "PUT" | "PATCH";
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   body: { [key: string]: any } | any[];
 };
 
@@ -66,20 +65,6 @@ export type FetchOptions = (BodyFetchOptions | BodilessFetchOptions) & {
   accessToken?: string | null;
   urlBase?: string;
 };
-
-/** This ensures the path is no longer than two subdirectories.
- *
- * @param path The path to shorten.
- * @returns The shortened path, containing at most one separator (slash).
- *
- * @example pathToTag("a/b/c") => "a/b"
- * @example pathToTag("a") => "a"
- */
-export function pathToTag(path: string) {
-  const parts = path.split("/");
-  if (parts.length < 2) return path;
-  return parts.slice(0, 2).join("/");
-}
 
 export async function fetchFromApi<T>(
   path: string,

@@ -27,7 +27,7 @@ async function Episode({
   const airDate = formatter.dateTime(getEpisodeAirDate(episode), "dateTime");
 
   return (
-    <div className="bg-background box-border flex w-full flex-col items-center gap-2 rounded-lg p-2 px-4 sm:flex-row sm:justify-between">
+    <div className="border-background-soft bg-background-strong hover:border-accent/30 box-border flex w-full flex-col items-center gap-2 rounded-lg border p-2 px-4 transition-colors duration-200 sm:flex-row sm:justify-between">
       <div className="w-full self-start overflow-hidden">
         <div className="grid grid-cols-[auto_1fr] gap-2" title={episode.name}>
           <p>{formatters.serialiseEpisode(episode)}</p>
@@ -78,7 +78,7 @@ export async function EpisodesList({
       <div className="collapsible collapsed peer-has-checked:expanded focus-within:expanded">
         <div className="overflow-hidden">
           <Tile
-            containerClassName="w-full"
+            containerClassName="w-full border-background-soft"
             className={cn("grid w-full gap-3 xl:gap-x-6 xl:gap-y-4", {
               "xl:grid-cols-2": episodes.length > 1,
             })}

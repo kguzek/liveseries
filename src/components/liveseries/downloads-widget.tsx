@@ -177,7 +177,7 @@ export function DownloadsWidget({
         >
           {downloadedEpisodes.map((episode, idx) => {
             const downloadProgress = (100 * (episode.progress ?? 0)).toFixed(1) + "%";
-            const episodeLink = `/liveseries/watch/${episode.showName}/${episode.season}/${episode.episode}`;
+            const episodeLink = `/watch/${episode.showName}/${episode.season}/${episode.episode}`;
             const key = `downloads-card-${idx}`;
             const card = (
               <div className="flex w-full flex-col items-start p-2 text-sm sm:text-base">

@@ -38,6 +38,10 @@ jobs:
         run: pnpm run lint
         if: always()
 
+      - name: Typecheck
+        run: pnpm run types:check
+        if: always()
+
   build:
     runs-on: ubuntu-latest
 

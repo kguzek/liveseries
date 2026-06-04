@@ -3,37 +3,62 @@
 import type { ComponentProps } from "react";
 import AbsoluteLink from "next/link";
 import { useRef } from "react";
+import { Search, TrendingUp } from "lucide-react";
 
 import type { MenuItem } from "@/lib/types";
 import type { User } from "@/payload-types";
+import { AppLink } from "@/components/link/app-link";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useScroll } from "@/lib/hooks/scroll";
-import { PAGE_NAME } from "@/lib/util";
 import { cn } from "@/lib/utils";
 
 import { Logo } from "../image/logo";
 import { LanguageSelector } from "./language-selector";
 import { UserWidget } from "./user-widget";
 
+const ICONS_BY_URL: Record<string, typeof TrendingUp | undefined> = {
+  "/most-popular": TrendingUp,
+  "/search": Search,
+};
+
 function NavBarItem({
   item,
   ...props
-}: { item: MenuItem } & Omit<ComponentProps<typeof Link>, "href">) {
+}: { item: MenuItem } & Omit<
+  ComponentProps<typeof AppLink>,
+  "href" | "icon" | "children"
+>) {
   const pathname = usePathname();
+  const Icon = ICONS_BY_URL[item.url];
 
-  // Handle edge case for index page ("/")
+  if (!Icon) {
+    const Comp = item.isAbsolute ? AbsoluteLink : Link;
+    const isActive = item.url === "/" ? pathname === "/" : pathname?.startsWith(item.url);
+    return (
+      <Comp
+        {...props}
+        href={item.url}
+        className={cn("text-primary flex items-center gap-2", {
+          "text-primary-strong": isActive,
+        })}
+      >
+        <span
+          className={cn("hover-underline", {
+            "underlined text-primary-strong": isActive,
+          })}
+        >
+          {item.label || item.title}
+        </span>
+      </Comp>
+    );
+  }
+
   const isActive = item.url === "/" ? pathname === "/" : pathname?.startsWith(item.url);
-  const Comp = item.isAbsolute ? AbsoluteLink : Link;
+
   return (
-    <Comp
-      {...props}
-      href={item.url}
-      className={cn("hover-underline text-primary", {
-        "underlined text-primary-strong": isActive,
-      })}
-    >
+    <AppLink {...props} href={item.url} icon={Icon} active={isActive}>
       {item.label || item.title}
-    </Comp>
+    </AppLink>
   );
 }
 
@@ -44,6 +69,7 @@ export function NavigationBar({
   user: User | null;
   menuItems: MenuItem[];
 }) {
+  const pathname = usePathname();
   const { scrollY } = useScroll();
   const hamburgerRef = useRef<HTMLInputElement>(null);
 
@@ -59,15 +85,30 @@ export function NavigationBar({
   return (
     <nav
       className={cn(
-        "fixed top-0 z-10 flex h-(--navbar-height) w-screen items-center gap-4 border-0 border-b border-solid border-transparent bg-transparent px-4 [transition:all_300ms_ease,border-color_1s_ease] sm:px-10 lg:gap-6",
+        "fixed top-0 z-10 flex h-(--navbar-height) w-screen items-center gap-4 border-0 border-b border-solid border-transparent bg-transparent px-4 [transition:all_300ms_ease,border-color_1s_ease] sm:px-[40px] lg:gap-6",
         "noscript:border-background-soft noscript:bg-background-strong/70 noscript:backdrop-blur-2xl",
         {
           "border-background-soft bg-background-strong/70 backdrop-blur-2xl": scrollY > 0,
         },
       )}
     >
-      <Logo size={80} />
-      <p className="font-bold whitespace-nowrap sm:text-3xl">{PAGE_NAME}</p>
+      <Link
+        href="/"
+        aria-label="LiveSeries Home"
+        className="group flex items-center gap-2"
+      >
+        <Logo
+          size={80}
+          className="transition-transform duration-300 group-hover:scale-110"
+        />
+        <span
+          className={cn("hover-underline font-bold whitespace-nowrap sm:text-3xl", {
+            "underlined!": pathname === "/",
+          })}
+        >
+          LiveSeries
+        </span>
+      </Link>
       <div className="ml-auto flex flex-row-reverse self-stretch lg:flex-row">
         {/* Hamburger */}
         <label
@@ -81,12 +122,11 @@ export function NavigationBar({
             ref={hamburgerRef}
             aria-controls="menu"
             aria-expanded="false"
-            onChange={(event_) =>
-              event_.target.setAttribute(
-                "aria-expanded",
-                event_.target.checked.toString(),
-              )
-            }
+            onChange={(event_) => {
+              const isChecked = event_.target.checked;
+              event_.target.setAttribute("aria-expanded", isChecked.toString());
+              document.body.style.overflow = isChecked ? "hidden" : "";
+            }}
           />
           <div className="bg-primary mb-1.5 w-6 transform rounded-full pt-0.5 transition-transform duration-300 peer-checked:translate-y-2 peer-checked:-rotate-45"></div>
           <div className="bg-primary mb-1.5 w-6 rounded-full pt-0.5 opacity-100 transition-opacity peer-checked:opacity-0"></div>
@@ -106,7 +146,10 @@ export function NavigationBar({
           className="border-background-soft bg-gradient-main/50 shadow-background-strong invisible absolute top-0 right-0 z-20 w-full origin-top translate-y-[-100%] items-center gap-6 rounded-b-lg border-0 border-b py-4 opacity-0 shadow-lg backdrop-blur-2xl transition-all duration-300 select-none peer-has-checked:visible peer-has-checked:translate-y-0 peer-has-checked:scale-100 peer-has-checked:opacity-100 sm:top-3 sm:right-10 sm:w-[50%] sm:origin-top-right sm:translate-y-0 sm:scale-[25%] sm:rounded-lg sm:border sm:border-solid lg:visible lg:static lg:flex lg:w-full lg:scale-100 lg:transform-none lg:border-none lg:bg-transparent lg:pt-0 lg:pb-0 lg:opacity-100 lg:shadow-none lg:backdrop-blur-none"
         >
           {menuItems.map((item) => (
-            <li className="py-2 text-center" key={`nav-link-${item.id}`}>
+            <li
+              className="flex justify-center px-4 py-3 lg:py-0"
+              key={`nav-link-${item.id}`}
+            >
               <NavBarItem onClick={closeMenu} item={item} />
             </li>
           ))}
@@ -119,7 +162,7 @@ export function NavigationBar({
   );
 }
 
-export function MiniNavBar({
+function MiniNavBar({
   pathBase,
   pages,
 }: {

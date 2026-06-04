@@ -1,7 +1,7 @@
 "use client";
 
 import type { Episode as TvMazeEpisode, Show as TvMazeShow } from "tvmaze-wrapper-ts";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { CircleDashedIcon, CircleIcon, DownloadIcon, TriangleIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
@@ -36,19 +36,19 @@ export function EpisodeDownloadIndicator({
     episode: episode.number,
   };
 
-  const [metadata, setMetadata] = useState<undefined | DownloadedEpisode>(undefined);
+  const contextMetadata = useMemo(
+    () => downloadedEpisodes.find((check) => compareEpisodes(check, episodeObject)),
+    [downloadedEpisodes],
+  );
+  const [localMetadata, setLocalMetadata] = useState<undefined | DownloadedEpisode>(
+    undefined,
+  );
+  const metadata = localMetadata ?? contextMetadata;
   const t = useTranslations();
   const locale = useLocale();
   const formatters = getFormatters(locale);
 
   const episodeString = `${tvShow.name} ${formatters.serialiseEpisode(episode)}`;
-
-  useEffect(() => {
-    const meta = downloadedEpisodes.find((check) =>
-      compareEpisodes(check, episodeObject),
-    );
-    if (meta) setMetadata(meta);
-  }, [downloadedEpisodes]);
 
   async function startDownload() {
     if (user == null || accessToken == null) {
@@ -71,11 +71,15 @@ export function EpisodeDownloadIndicator({
         urlBase: user.serverUrl,
         accessToken,
       });
-      setMetadata((old) => old && { ...old, status: DownloadStatus.PENDING });
+      setLocalMetadata(
+        contextMetadata && { ...contextMetadata, status: DownloadStatus.PENDING },
+      );
     } catch (error) {
       console.error(error);
       showErrorToast(t("liveSeries.episodes.downloadError", { episode: episodeString }));
-      setMetadata((old) => old && { ...old, status: DownloadStatus.FAILED });
+      setLocalMetadata(
+        contextMetadata && { ...contextMetadata, status: DownloadStatus.FAILED },
+      );
     }
   }
 
@@ -136,7 +140,7 @@ export function EpisodeDownloadIndicator({
       )}
       {!showProgress && user != null && (
         <Link
-          href={`/liveseries/watch/${tvShow.name}/${episode.season}/${episode.number}`}
+          href={`/watch/${tvShow.name}/${episode.season}/${episode.number}`}
           title={t(`liveSeries.episodes.downloadStatus.${DownloadStatus.COMPLETE}`)}
         >
           <TriangleIcon

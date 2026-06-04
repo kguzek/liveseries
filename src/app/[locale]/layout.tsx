@@ -2,10 +2,10 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Raleway, Roboto_Slab } from "next/font/google";
 import Script from "next/script";
-import NextTopLoader from "nextjs-toploader";
 
 import { Footer } from "@/components/footer";
 import { Navigation } from "@/components/navigation";
+import { PageTransition } from "@/components/page-transition";
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
@@ -116,8 +116,6 @@ export default async function RootLayout({
 
   setRequestLocale(locale);
 
-  // Providing all messages to the client
-  // side is the easiest way to get started
   const messages = await getMessages();
 
   return (
@@ -135,16 +133,10 @@ export default async function RootLayout({
           <QueryProvider>
             <TooltipProvider>
               <GlowCapture className="flex min-h-screen flex-col pt-(--navbar-height)">
-                <NextTopLoader
-                  color="#2596be"
-                  showSpinner={false}
-                  height={2}
-                  crawlSpeed={100}
-                  crawl={true}
-                  initialPosition={0.1}
-                />
                 <Navigation />
-                <main className="grow">{children}</main>
+                <main className="grow">
+                  <PageTransition>{children}</PageTransition>
+                </main>
                 <Footer />
               </GlowCapture>
               <Toaster />

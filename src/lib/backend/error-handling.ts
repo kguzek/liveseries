@@ -36,32 +36,6 @@ export class HttpError extends RequestError {
   }
 }
 
-export class BodyConsumptionError extends RequestError {
-  response: Response;
-
-  constructor(response: Response) {
-    super("Body consumption error", "body");
-    this.response = response;
-  }
-}
-
-export class JsonParsingError extends RequestError {
-  response: Response;
-  data: string;
-
-  constructor(response: Response, data: string) {
-    super("Body parsing error", "json");
-    this.response = response;
-    this.data = data;
-  }
-}
-
-export type FetchError =
-  | NetworkError
-  | HttpError
-  | BodyConsumptionError
-  | JsonParsingError;
-
 export async function getResponse<T>(url: string, options: RequestInit) {
   const method = options.method ?? "GET";
 

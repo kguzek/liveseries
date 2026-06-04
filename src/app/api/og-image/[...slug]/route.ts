@@ -7,6 +7,7 @@ import type { CustomMiddleware } from "@/lib/types";
 import { PRODUCTION_URL } from "@/lib/constants";
 
 export const revalidate = 2592000; // 30 days
+export const dynamic = "force-dynamic";
 
 const API_SLUG_PATTERN = /^\/api\/og-image((?:\/[.\w-]+)*)/;
 

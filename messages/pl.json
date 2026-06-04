@@ -125,6 +125,36 @@
     "title": "LiveSeries",
     "seoTitle": "LiveSeries – Śledzenie i Streamowanie Seriali",
     "description": "Serwis do śledzenia seriali i streamowania torrentów. Oglądaj odcinki seriali w czasie rzeczywistym, sprawdzaj oceny i więcej. Znajdź swoje ulubione seriale i bądź na bieżąco za pomocą usługi automatycznego pobierania odcinków.",
+    "landing": {
+      "eyebrow": "Automatyzacja seriali na własnym serwerze",
+      "title": "Śledź seriale, pobieraj odcinki i streamuj z własnego serwera.",
+      "description": "LiveSeries łączy aplikację webową z Twoim własnym serwerem. Utwórz konto, ustaw w profilu adres serwera, wyszukuj seriale, oznaczaj obejrzane odcinki, subskrybuj automatyczne pobieranie i oglądaj pliki w przeglądarce.",
+      "serverRepository": "Repozytorium serwera",
+      "dashboard": "Otwórz panel",
+      "steps": {
+        "server": {
+          "title": "Uruchom serwer",
+          "body": "Zainstaluj liveseries-server przez Docker Compose albo ręcznie. Serwer obsługuje torrenty, pobrane pliki, napisy i streaming w przeglądarce."
+        },
+        "account": {
+          "title": "Połącz konto",
+          "body": "Zarejestruj się tutaj, dodaj swój UUID użytkownika do whitelisty serwera, a następnie zapisz adres serwera LiveSeries w profilu."
+        },
+        "watch": {
+          "title": "Wybierz seriale",
+          "body": "Wyszukuj seriale, polub ulubione tytuły, subskrybuj automatyczne pobieranie albo ręcznie pobieraj pojedyncze odcinki."
+        },
+        "cta": "Rozpocznij",
+        "ctaServer": "Instrukcja",
+        "ctaAccount": "Załóż konto",
+        "ctaSearch": "Znajdź seriale"
+      },
+      "cron": {
+        "title": "Automatyczne pobieranie nieobejrzanych odcinków",
+        "body": "Serwer może automatycznie sprawdzać nowe odcinki subskrybowanych seriali co sześć godzin. Aby to włączyć, dodaj poniższy oficjalny UUID automatyzacji do whitelisty liveseries-server.",
+        "copy": "Skopiuj do schowka"
+      }
+    },
     "whatsThis": "Co to?",
     "explanation": "Aby móc wyszukiwać i pobierać torrenty seriali, musisz skonfigurować serwer LiveSeries. Serwer ten będzie używany do pobierania torrentów i przesyłania do przeglądarki filmów.",
     "cta": "Dowiedz się więcej na ",
@@ -207,7 +237,8 @@
     "websockets": {
       "connectionFailed": "Nie udało się nawiązać połączenia z serwerem. Upewnij się że URL serwera LiveSeries zostało skonfigurowane poprawnie i spróbuj ponownie później.",
       "error": "Nastąpił nieoczekiwany błąd podczas komunikacji z serwerem LiveSeries. Spróbuj ponownie później.",
-      "askReconnect": "Połączenie z serwerem LiveSeries zostało przerwane. Ponowić próbę połączenia?"
+      "askReconnect": "Połączenie z serwerem LiveSeries zostało przerwane. Ponowić próbę połączenia?",
+      "authFailed": "Nie udało się uwierzytelnić z serwerem LiveSeries. Upewnij się, że Twój UUID użytkownika znajduje się na whiteliscie serwera."
     }
   }
 }

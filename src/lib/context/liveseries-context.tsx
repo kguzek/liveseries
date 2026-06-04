@@ -55,7 +55,7 @@ const LiveSeriesContext = createContext<
 export function useLiveSeriesContext() {
   const context = useContext(LiveSeriesContext);
   if (!context) {
-    throw new Error("useLiveSeries must be used within /liveseries.");
+    throw new Error("useLiveSeries must be used within a LiveSeries page.");
   }
   return context;
 }
@@ -74,7 +74,7 @@ function getWatchedEpisodes(
   const unique = ensureUnique(watchedInSeason);
   // Not updating state directly to avoid "Updated more hooks than during the previous render"
   const { [showId]: showData, ...updatedWatchedEpisodes } = watchedEpisodes;
-  const { [season]: _, ...updatedShowData } = showData ?? {}; // eslint-disable-line @typescript-eslint/no-unused-vars
+  const { [season]: _unused, ...updatedShowData } = showData ?? {};
   if (unique.length > 0) {
     updatedShowData[season] = unique;
   }
@@ -162,7 +162,13 @@ export function LiveSeriesProvider({
     };
     socket.onclose = async (evt) => {
       console.warn("Websocket closed on path", pathname, evt);
-      if (!pathname.startsWith("/liveseries")) {
+      if (
+        pathname !== "/" &&
+        !pathname.startsWith("/search") &&
+        !pathname.startsWith("/most-popular") &&
+        !pathname.startsWith("/tv-show") &&
+        !pathname.startsWith("/watch")
+      ) {
         console.info(
           "Silently dismissing websocket closure because the user navigated away.",
         );
@@ -190,7 +196,7 @@ export function LiveSeriesProvider({
           if (message.success) {
             poll([]);
           } else {
-            showErrorToast(t("liveSeries.websockets.connectionFailed"));
+            showErrorToast(t("liveSeries.websockets.authFailed"));
             socket.close();
           }
           break;

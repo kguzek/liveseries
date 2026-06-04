@@ -8,7 +8,7 @@ import { getAuth } from "@/lib/providers/auth-provider";
 import { Tile } from "../tile";
 import { TvShowPreview } from "./tv-show-preview";
 
-export const RESULTS_PER_PAGE = 25;
+const RESULTS_PER_PAGE = 25;
 
 export async function TvShowPreviewList({
   tvShows,

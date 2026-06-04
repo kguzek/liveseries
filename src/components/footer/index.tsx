@@ -37,7 +37,9 @@ export async function Footer() {
       </Glow>
       <div className="mt-4 flex flex-col items-center justify-center gap-x-3 gap-y-6 text-xs sm:flex-row">
         <div className="flex items-center gap-3">
-          <Logo size={24} />
+          <Link href="/" aria-label="LiveSeries Home">
+            <Logo size={24} />
+          </Link>
           <Link
             className="hover-underline flex min-h-6 items-center"
             href={GITHUB_URL}

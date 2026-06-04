@@ -33,11 +33,6 @@ export const successToast = (message: string) => ({
   message,
 });
 
-export const infoToast = (message: string) => ({
-  icon: <Info className="text-accent" />,
-  message,
-});
-
 export function showSuccessToast(
   text: string,
   optionsOverride: Omit<ExternalToast, "message"> = {},

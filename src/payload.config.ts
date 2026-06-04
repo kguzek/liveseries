@@ -10,10 +10,6 @@ import { BlockEmailButton } from "./collections/blocks/BlockEmailButton";
 import { Emails } from "./collections/Emails";
 import { Media } from "./collections/Media";
 import { OgImages } from "./collections/OgImages";
-import { Pages } from "./collections/Pages";
-import { ProjectCategories } from "./collections/ProjectCategories";
-import { Projects } from "./collections/Projects";
-import { Technologies } from "./collections/Technologies";
 import { Users } from "./collections/Users";
 import {
   EMAIL_FROM_ADDRESS,
@@ -36,16 +32,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [
-    Users,
-    Media,
-    Projects,
-    Pages,
-    ProjectCategories,
-    Technologies,
-    OgImages,
-    Emails,
-  ],
+  collections: [Users, Media, OgImages, Emails],
   blocks: [BlockEmailButton],
   editor: richTextEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

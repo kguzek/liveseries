@@ -18,7 +18,6 @@ export async function ErrorComponent({
   | { errorCode: ErrorCode; errorResult?: never }
   | {
       errorCode?: never;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       errorResult: { ok: boolean; error: any; hasBody: boolean; data: any };
     }
 ) & { errorMessage?: ReactNode; path?: string }) {

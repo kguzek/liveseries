@@ -1,23 +1,23 @@
 services:
   db:
     image: postgres:latest
-    container_name: guzek-uk-db
-    restart: always
+    restart: unless-stopped
     env_file:
       - .env.local
     environment:
-      - POSTGRES_USER=${DATABASE_USER}
-      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-      - POSTGRES_DB=${DATABASE_NAME:-guzek_uk}
+      - POSTGRES_USER=${DATABASE_USER:-liveseries}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD:-liveseries}
+      - POSTGRES_DB=${DATABASE_NAME:-liveseries}
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U myuser"]
-      interval: 10s
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER:-liveseries}"]
+      interval: 5s
       timeout: 5s
       retries: 5
 
 volumes:
   postgres_data:
+    name: liveseries_postgres_data

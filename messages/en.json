@@ -125,6 +125,36 @@
     "title": "LiveSeries",
     "seoTitle": "LiveSeries – TV Show Tracking & Streaming",
     "description": "A TV show tracking & torrent streaming service. Real-time TV show episodes, ratings, and more. Find your favourite TV shows and stay up-to-date by subscribing to automatic episode downloads.",
+    "landing": {
+      "eyebrow": "Self-hosted TV automation",
+      "title": "Track shows, download episodes, and stream from your own server.",
+      "description": "LiveSeries combines a hosted web app with your own self-hosted server. Create an account, point your profile at your server URL, then search for shows, mark watched episodes, subscribe to automatic downloads, and stream the files in your browser.",
+      "serverRepository": "Server repository",
+      "dashboard": "Open your dashboard",
+      "steps": {
+        "server": {
+          "title": "Run the server",
+          "body": "Install liveseries-server with Docker Compose or manually. It handles torrents, downloaded files, subtitles, and browser streaming."
+        },
+        "account": {
+          "title": "Connect your account",
+          "body": "Sign up here, copy your user UUID into the server whitelist, then save your LiveSeries Server URL in your profile."
+        },
+        "watch": {
+          "title": "Pick shows",
+          "body": "Search TV shows, like your favourites, subscribe to automatic downloads, or download individual episodes manually."
+        },
+        "cta": "Get started",
+        "ctaServer": "Setup Guide",
+        "ctaAccount": "Create Account",
+        "ctaSearch": "Find Shows"
+      },
+      "cron": {
+        "title": "Automatic unwatched episode downloads",
+        "body": "The server can automatically check for new episodes of your subscribed shows every six hours. To opt in, add the official automation user UUID below to your liveseries-server whitelist.",
+        "copy": "Copy to clipboard"
+      }
+    },
     "whatsThis": "What's this?",
     "explanation": "In order to search for and download TV show torrents, you must set up a LiveSeries server. This server will be used to fetch torrent files and stream video content.",
     "cta": "Find out more at ",
@@ -207,7 +237,8 @@
     "websockets": {
       "connectionFailed": "Could not establish a connection with the websocket. Ensure the LiveSeries server URL is configured correctly and try again later.",
       "error": "An unknown error occured during websocket communication. Try again later.",
-      "askReconnect": "The websocket connection with the LiveSeries server was forcefully closed. Reconnect?"
+      "askReconnect": "The websocket connection with the LiveSeries server was forcefully closed. Reconnect?",
+      "authFailed": "Could not authenticate with the LiveSeries server. Please make sure your user UUID is whitelisted on the server."
     }
   }
 }

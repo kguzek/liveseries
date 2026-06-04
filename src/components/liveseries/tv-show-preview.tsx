@@ -67,18 +67,20 @@ export function TvShowPreview({
 
   // const useIdNotPermalink = `${showDetails?.permalink}` === `${+showDetails?.permalink}`;
   // const link = `/liveseries/tv-show/${useIdNotPermalink ? showDetails.id : showDetails?.permalink}`;
-  const link = `/liveseries/tv-show/${tvShow.id}`;
+  const link = `/tv-show/${tvShow.id}`;
 
   const imageUrl = tvShow.image?.medium ?? tvShow.image?.original;
   const imageAlt = `${tvShow.name} thumbnail`;
 
   return (
-    <Tile glow containerClassName="w-[240px] pt-3 pb-0 h-full" className="w-full p-0">
+    <Tile
+      glow
+      containerClassName="w-[240px] pt-3 pb-0 h-full border-background-soft overflow-hidden hover:border-accent/40 transition-colors duration-300"
+      className="w-full p-0"
+    >
       <div className="flex w-full justify-between gap-1 px-4 py-2">
         <Link href={link} title={tvShow?.name} className="overflow-hidden">
-          <p className="cutoff text-primary">
-            {tvShow?.name} {tvShow.network?.country && `(${tvShow.network.country.code})`}
-          </p>
+          <p className="cutoff text-primary">{tvShow?.name}</p>
         </Link>
 
         <button

@@ -39,7 +39,7 @@ export function Tile({
     <Card
       className={cn(
         "w-fit items-center",
-        { "glow:border-accent": glow },
+        { "glow:border-accent glow:bg-accent/[7%]": glow },
         containerClassName,
       )}
     >

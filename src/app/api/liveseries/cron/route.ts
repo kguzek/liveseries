@@ -71,7 +71,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   const payload = await getPayload({ config });
   const users = await payload.find({
     collection: "users",
-    where: { serverUrl: { like: "http ://" } },
+    where: { serverUrl: { like: "http" } },
   });
   let accessToken: string | undefined;
   let error = "Invalid credentials";

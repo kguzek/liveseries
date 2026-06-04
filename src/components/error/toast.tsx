@@ -5,20 +5,18 @@ import { toast } from "sonner";
 
 import { HttpError, NetworkError } from "@/lib/backend/error-handling";
 
-/** Generic toast config to ensure consistent error message styling. */
-export const errorToast = (message: ReactNode) => ({
-  icon: <CircleAlert className="text-error not-first:hidden" />,
-  message: <p className="ml-2 whitespace-pre-wrap">{message}</p>,
-});
-
 /** Used for automatically determining the error option for `toast.promise`. */
-export const fetchErrorToast = (fallbackMessage: string) => (error: unknown) =>
-  errorToast(
-    error instanceof HttpError || error instanceof NetworkError
-      ? error.message
-      : fallbackMessage,
+export const fetchErrorToast = (fallbackMessage: string) => (error: unknown) => {
+  const icon = <CircleAlert className="text-error not-first:hidden" />;
+  const message = (
+    <p className="ml-2 whitespace-pre-wrap">
+      {error instanceof HttpError || error instanceof NetworkError
+        ? error.message
+        : fallbackMessage}
+    </p>
   );
-
+  return { icon, message };
+};
 /** Used for showing custom error messages in legacy backend. */
 export function showErrorToast(text: ReactNode, optionsOverride?: ExternalToast) {
   const { message, ...options } = errorToast(text);

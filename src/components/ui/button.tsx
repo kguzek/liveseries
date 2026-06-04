@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties, EventHandler, MouseEvent, TouchEvent } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Glow } from "@codaworks/react-glow";
 import { Slot } from "@radix-ui/react-slot";
 import { Loader, Lock } from "lucide-react";
@@ -37,6 +37,10 @@ export function Button({
       clearInterval(ref);
     };
   }, [hoverTimerRef]);
+
+  const sliderCallbackRef = useCallback((element: HTMLButtonElement | null) => {
+    sliderRef.current = element;
+  }, []);
 
   function startHoverTimer() {
     stopHoverTimer();
@@ -129,17 +133,7 @@ export function Button({
         }
         props.onTouchEnd?.(event_);
       }}
-      ref={(element) => {
-        sliderRef.current = element;
-        if (props.ref == null) {
-          return;
-        }
-        if (typeof props.ref === "function") {
-          props.ref(element);
-        } else {
-          props.ref.current = element;
-        }
-      }}
+      ref={sliderCallbackRef}
     >
       {loading ? (
         <Loader className="animate-spin" />

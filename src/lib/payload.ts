@@ -12,6 +12,7 @@ export const ALPHANUMERIC_PATTERN = /^[a-zA-Z0-9][\w-]+[a-zA-Z0-9]$/;
 export const isAdminFieldLevel: FieldAccess = ({ req: { user } }) =>
   user?.role === "admin";
 
+/** @alias */
 export const isAdmin: Access = isAdminFieldLevel;
 
 export const isAdminOrSelf: Access = ({ req }) =>
@@ -32,21 +33,12 @@ export function validateUrl(value?: string | null): string | true {
   );
 }
 
-/** Ensures the value is falseys or a valid GitHub repository URL. */
-export function validateGitHubUrl(value?: string | null): string | true {
-  return (
-    !value ||
-    /^https:\/\/github\.com\/[^/]+\/[^/]+$/.test(value) ||
-    "Must be a valid GitHub repository URL."
-  );
-}
-
 /** Ensures every item in the array appears at most once. */
 export const isEmptyOrUniqueArray: NumberFieldManyValidation = (array) =>
   (array != null && new Set(array).size === array.length) ||
   "Every array item must be unique.";
 
-export const isNonNegativeInteger = (value: string | number) =>
+const isNonNegativeInteger = (value: string | number) =>
   Number.isInteger(+value) && +value >= 0;
 
 export const isEmptyOrNonNegativeIntegerArray = (
@@ -72,7 +64,6 @@ export const stackValidators =
       }, Promise.resolve<string[]>([]))
       .then((results) => results.length === 0 || results.join(" "));
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const richTextEditor = (...features: FeatureProviderServer<any, any, any>[]) =>
   lexicalEditor({
     features: ({ defaultFeatures, rootFeatures }) => [
