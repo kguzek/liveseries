@@ -1,7 +1,7 @@
 {
-  "name": "liveseries-web",
-  "homepage": "https://www.guzek.uk/",
-  "version": "4.5.1",
+  "name": "liveseries",
+  "homepage": "https://liveseri.es/",
+  "version": "5.0.0",
   "type": "module",
   "engines": {
     "node": "^24.14.0"

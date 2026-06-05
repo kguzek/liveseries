@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 
 import type { MiddlewareFactory } from "@/lib/types";
+import { WEBSITE_HOST } from "@/lib/constants";
 
 import { getMiddlewareLocation } from "./util";
 
@@ -14,7 +15,7 @@ export const redirectMiddleware: MiddlewareFactory = (next) =>
       return redirect(pathname, { absolute: true });
     }
     if (
-      host.endsWith(".guzek.uk") &&
+      host === WEBSITE_HOST &&
       request.nextUrl.protocol === "http:" &&
       process.env.NODE_ENV !== "development"
     ) {

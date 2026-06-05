@@ -1,7 +1,8 @@
 export const PAGINATED_REGEX = /^\/(?:search\/[^\/]+|most-popular)\/\d+?$/;
 
 export const WEBSITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL || process.env.WEBSITE_URL;
-export const PRODUCTION_URL = WEBSITE_URL || "https://www.guzek.uk";
+export const WEBSITE_HOST = "liveseri.es";
+export const PRODUCTION_URL = WEBSITE_URL || `https://${WEBSITE_HOST}`;
 export const GITHUB_URL = "https://github.com/kguzek";
 export const LIVESERIES_SERVER_HOMEPAGE = `${GITHUB_URL}/liveseries-server`;
 export const TVMAZE_SCRAPER_BASE_URL =

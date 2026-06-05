@@ -18,7 +18,7 @@ import {
 
 const TV_MAZE_URL = "https://www.tvmaze.com/";
 
-const REPO_NAME = "website";
+const REPO_NAME = "liveseries";
 
 const BETA_INFO = {
   enabled: false,

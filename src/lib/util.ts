@@ -10,7 +10,7 @@ import type {
 } from "@/lib/types";
 
 import type { DownloadedEpisode } from "./types";
-import { EMAIL_VERIFICATION_COOKIE, LOCALES } from "./constants";
+import { EMAIL_VERIFICATION_COOKIE, LOCALES, WEBSITE_HOST } from "./constants";
 
 const PRODUCTION_MODE = process.env.NODE_ENV !== "development";
 
@@ -135,7 +135,7 @@ export function getCookieOptions({
     expires: new Date(exp ?? Date.now() + expiresIn * 1000),
     path: "/",
     sameSite: "lax",
-    domain: PRODUCTION_MODE ? ".guzek.uk" : undefined,
+    domain: PRODUCTION_MODE ? `.${WEBSITE_HOST}` : undefined,
     secure: PRODUCTION_MODE,
     ...options,
   } as const;

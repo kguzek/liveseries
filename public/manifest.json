@@ -1,7 +1,7 @@
 {
-  "name": "Guzek UK",
-  "short_name": "Guzek UK",
-  "description": "The Guzek UK Website created by Konrad Guzek.",
+  "name": "LiveSeries - TV Show Tracking & Streaming",
+  "short_name": "LiveSeries",
+  "description": "LiveSeries is a free TV show episode tracker. It allows you to keep track of the TV shows you watch, see when new episodes are coming out, and manage your watchlist.",
   "theme_color": "#2596be",
   "background_color": "#262322",
   "display": "standalone",
