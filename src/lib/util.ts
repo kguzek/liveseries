@@ -14,7 +14,7 @@ import { EMAIL_VERIFICATION_COOKIE, LOCALES, WEBSITE_HOST } from "./constants";
 
 const PRODUCTION_MODE = process.env.NODE_ENV !== "development";
 
-export const PAGE_NAME = "Konrad Guzek";
+export const PAGE_NAME = "LiveSeries";
 
 export function getTitle(title: string, suffix: string) {
   return `${title} – ${suffix}`;
