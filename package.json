@@ -81,7 +81,7 @@
     "@types/react-dom": "^19.2.3",
     "eslint-config-next": "^16.2.10",
     "knip": "^6.26.0",
-    "postcss": "^8.5.15",
+    "postcss": "^8.5.19",
     "postcss-load-config": "^6.0.1",
     "prettier-plugin-tailwindcss": "^0.8.0",
     "tailwindcss": "^4.3.2",
