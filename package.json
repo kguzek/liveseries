@@ -83,7 +83,7 @@
     "knip": "^6.26.0",
     "postcss": "^8.5.15",
     "postcss-load-config": "^6.0.1",
-    "prettier-plugin-tailwindcss": "^0.8.0",
+    "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.63.0"
