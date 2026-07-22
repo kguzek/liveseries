@@ -56,7 +56,7 @@
     "nprogress": "^0.2.0",
     "payload": "^3.86.0",
     "prettier": "^3.9.5",
-    "react": "^19.2.7",
+    "react": "^19.2.8",
     "react-dom": "^19.2.7",
     "react-hook-form": "^7.82.0",
     "react-stacked-center-carousel": "^1.0.14",
