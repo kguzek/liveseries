@@ -62,7 +62,7 @@
     "react-stacked-center-carousel": "^1.0.14",
     "sharp": "^0.35.4",
     "sonner": "^2.0.8",
-    "tailwind-merge": "^3.6.0",
+    "tailwind-merge": "^3.7.0",
     "tailwindcss-animate": "^1.0.7",
     "tvmaze-wrapper-ts": "^2.1.2",
     "uuid": "^14.0.2",
