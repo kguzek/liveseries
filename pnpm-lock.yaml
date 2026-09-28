@@ -136,8 +136,8 @@ importers:
         specifier: ^4.7.1
         version: 4.7.1(prettier@3.9.8)
       '@next/eslint-plugin-next':
-        specifier: ^16.3.5
-        version: 16.3.5(eslint@9.39.5(jiti@2.7.0))
+        specifier: ^16.3.6
+        version: 16.3.6(eslint@9.39.5(jiti@2.7.0))
       '@tailwindcss/postcss':
         specifier: ^4.3.3
         version: 4.3.3
@@ -1504,6 +1504,9 @@ packages:
 
   '@next/eslint-plugin-next@16.3.5':
     resolution: {integrity: sha512-PGfSeItHJ12DH8t+6sEbuMe59NE5rAhCfgk06QKTH2ne9VUL1JlaXdYXY3B8RaiF2SO50rDYvd39TulP6A6xZQ==}
+
+  '@next/eslint-plugin-next@16.3.6':
+    resolution: {integrity: sha512-jowwDX+7DOlDIjJLgTMxudw+k37QnWu1JkZLkSi9MaJBfDYcfhAPMKBhXL0idYzFN/AGg//axnOR4cLkHX/Rng==}
 
   '@next/swc-darwin-arm64@16.3.5':
     resolution: {integrity: sha512-pMmGgETfKvElucLHtVaeiMRbp2zUbvKx7b1yGko0liBz3cw1mKSggWN/Rp/wPz8z+E1O82u3r4L1Co+ZS5hokQ==}
@@ -6786,6 +6789,13 @@ snapshots:
   '@next/env@16.3.5': {}
 
   '@next/eslint-plugin-next@16.3.5(eslint@9.39.5(jiti@2.7.0))':
+    dependencies:
+      '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.5(jiti@2.7.0))
+      fast-glob: 3.3.1
+    transitivePeerDependencies:
+      - eslint
+
+  '@next/eslint-plugin-next@16.3.6(eslint@9.39.5(jiti@2.7.0))':
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.5(jiti@2.7.0))
       fast-glob: 3.3.1
