@@ -57,7 +57,7 @@
     "payload": "^3.91.0",
     "prettier": "^3.9.10",
     "react": "^19.3.1",
-    "react-dom": "^19.3.0",
+    "react-dom": "^19.3.1",
     "react-hook-form": "^7.90.0",
     "react-stacked-center-carousel": "^1.0.14",
     "sharp": "^0.35.5",
